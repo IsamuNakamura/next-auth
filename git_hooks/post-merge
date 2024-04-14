@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cd front || exit
+if [[ $(command -v pnpm) == "" ]];then
+  exit 0
+fi
+
+pnpm install

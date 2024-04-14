@@ -1,0 +1,50 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.6.3/schema.json",
+	"files": {
+		"ignore": [
+			"public",
+			".next",
+			"node_modules",
+			"biome.json",
+			".vscode/settings.json"
+		]
+	},
+	"organizeImports": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"all": true,
+			"nursery": {
+				"all": true,
+				"noNodejsModules": "off",
+				"noUndeclaredDependencies": "off"
+			},
+			"style": {
+				"noImplicitBoolean": "off"
+			}
+		}
+	},
+	"overrides": [
+		{
+			"include": [
+				"next.config.mjs",
+				"error.tsx",
+				"layout.tsx",
+				"loading.tsx",
+				"not-found.tsx",
+				"page.tsx",
+				"template.tsx",
+				"tailwind.config.ts"
+			],
+			"linter": {
+				"rules": {
+					"style": {
+						"noDefaultExport": "off"
+					}
+				}
+			}
+		}
+	]
+}

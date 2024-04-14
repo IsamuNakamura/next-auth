@@ -1,0 +1,15 @@
+#!/bin/bash
+
+cd front || exit
+
+if [[ $(command -v pnpm) == "" ]];then
+  exit 0
+fi
+
+echo "Running biome format..."
+pnpm fix &> /dev/null
+
+if [ $? -ne 0 ]; then
+  echo "Please run pnpm format and lint to format and lint your code before commit."
+  exit 1
+fi
