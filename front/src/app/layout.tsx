@@ -5,6 +5,7 @@ import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import type { ReactNode } from "react";
+import { NextAuthProvider } from "~/lib/nextAuth/provider";
 import "~/lib/tailwind.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,7 +26,9 @@ export default function RootLayout({
 				<ColorSchemeScript defaultColorScheme="auto" />
 			</head>
 			<body className={inter.className}>
-				<MantineProvider defaultColorScheme="auto">{children}</MantineProvider>
+				<MantineProvider defaultColorScheme="auto">
+					<NextAuthProvider>{children}</NextAuthProvider>
+				</MantineProvider>
 			</body>
 		</html>
 	);

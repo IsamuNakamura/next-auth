@@ -22,7 +22,12 @@
 				"noUndeclaredDependencies": "off"
 			},
 			"style": {
-				"noImplicitBoolean": "off"
+				"noImplicitBoolean": "off",
+				"noNonNullAssertion": "off",
+				"useConst": "off"
+			},
+			"suspicious": {
+				"noExplicitAny": "off"
 			}
 		}
 	},
@@ -36,7 +41,9 @@
 				"not-found.tsx",
 				"page.tsx",
 				"template.tsx",
-				"tailwind.config.ts"
+				"tailwind.config.ts",
+				"api/auth/[...nextauth]/route.ts",
+				"lib/prisma/prisma.ts"
 			],
 			"linter": {
 				"rules": {
