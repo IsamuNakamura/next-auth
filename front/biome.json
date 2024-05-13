@@ -52,6 +52,42 @@
 					}
 				}
 			}
+		},
+		{
+			"include": ["*.tsx"],
+			"linter": {
+				"rules": {
+					"security": {
+						"noDangerouslySetInnerHtml": "off"
+					},
+					"nursery": {
+						"noConsole": "off"
+					}
+				}
+			}
+		},
+		{
+			"include": ["api/*/route.ts"],
+			"linter": {
+				"rules": {
+					"style": {
+						"useNamingConvention": "off"
+					},
+					"correctness": {
+						"noUnusedVariables": "off"
+					}
+				}
+			}
+		},
+		{
+			"include": ["lib/prisma/prisma.ts"],
+			"linter": {
+				"rules": {
+					"nursery": {
+						"noUndeclaredDependencies": "warn"
+					}
+				}
+			}
 		}
 	]
 }

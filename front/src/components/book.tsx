@@ -6,25 +6,61 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import type { BookType } from "~/types/book";
+import type { User } from "~/types/user";
 
 type BookProps = {
 	book: BookType;
+	isPurchased: boolean;
 };
 
-export function Book({ book }: BookProps) {
+export function Book({ book, isPurchased }: BookProps) {
 	const { data: session } = useSession();
-	const user = session?.user;
+	const user: User = session?.user as User;
 	const router = useRouter();
 	const [opened, { open, close }] = useDisclosure(false);
 
+	const startCheckout = async () => {
+		try {
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_API_URL}/checkout`,
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						title: book.title,
+						price: book.price,
+						bookId: book.id,
+						userId: user?.id,
+					}),
+				},
+			);
+
+			const responseData = await response.json();
+			if (responseData) {
+				router.push(responseData.checkout_url);
+			}
+		} catch (error) {
+			console.error("Error:", error);
+		}
+	};
+
 	const handleContentClick = () => {
+		if (isPurchased) {
+			alert("This book is already purchased");
+			return;
+		}
 		open();
 	};
 
 	const handlePurchaseClick = () => {
 		if (!user) {
 			router.push("/signin");
+			return;
 		}
+
+		startCheckout();
 	};
 
 	const handleCancelClick = () => {
